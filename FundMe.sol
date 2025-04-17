@@ -8,6 +8,8 @@ contract FundMe {
      uint256 public myValue = 1;
      //uint256 public minimumUsd = 5;
      uint256 public minimumUsd = 5e18; // bcz value of getConversionRate(msg.value) is in EHT with 18 decimal
+     address[] public funders; // store the addresses of fund senders
+     mapping (address funder => uint256 amountRaised) public fundsRaisedByAddress; // search the fund sent by address and get the value of total amount raised from that
     // define function of fund
     function Fund() public payable {
         // allow user to send money
@@ -16,7 +18,8 @@ contract FundMe {
         // 1: how we will send ETH to this contract via payable keyword
         // require(msg.value > 1e18, "not enough ETH amount!"); //1e18 = 1ETH = 1000000000000000000 wei , require mean its complusoty
         require(getConversionRate(msg.value) >= minimumUsd, "not enough ETH amount!"); //1e18 = 1ETH = 1000000000000000000 wei , require mean its complusoty
-
+        funders.push(msg.sender); // store address of sender to the funders array
+        fundsRaisedByAddress[msg.sender] = fundsRaisedByAddress[msg.sender] + msg.value;
         //emit FundReceived(msg.sender, msg.value); // for console.log
 
         // what is revert ?
