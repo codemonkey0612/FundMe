@@ -38,6 +38,7 @@ contract FundMe {
             address funder = funders[funderIndex]; // get address from the funders Array
             fundsRaisedByAddress[funder] = 0;   // set it to zero as we want only one time withdrawal for every funder.
         }
+        funders = new address[](0); // reset the array, "Wipe the funders list clean."Prevent double-withdrawal or double-counting: After withdrawing, you don’t want to consider the same funder again unless they fund again.
     }
 
    
