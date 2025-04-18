@@ -39,6 +39,22 @@ contract FundMe {
             fundsRaisedByAddress[funder] = 0;   // set it to zero as we want only one time withdrawal for every funder.
         }
         funders = new address[](0); // reset the array, "Wipe the funders list clean."Prevent double-withdrawal or double-counting: After withdrawing, you don’t want to consider the same funder again unless they fund again.
+        /* there are three ways to send or tranfer balance to sender
+        1: transfer, 2: send , 3: call
+        */
+        // payable keyword is used to give funds to the contract
+        // msg.sender = address
+        // payable(msg.sender) = payable address
+        // this key word is the object of thise whole contract
+        // transfer automatically revert the transection on failed
+        payable(msg.sender).transfer(address(this).balance); // msg.value will be equal to ETH balance of this contract in our case
+        // using send which return bool instead of throw any error, its very risky
+       bool sendSuccess = payable(msg.sender).send(address(this).balance);
+       // on send method we have to check manually if transection is failed so using require to revert it.
+       require(sendSuccess,"send failed");
+       // call , this is most powerfull function in eth infrasruction to call any external fucntion to call
+       (bool callSuccess,)= payable(msg.sender).call{value: address(this).balance}(""); // it return two values , gas used and return reason but here we need just success or not
+       require(callSuccess,"Call failed");
     }
 
    
