@@ -12,6 +12,11 @@ contract FundMe {
      uint256 public minimumUsd = 5e18; // bcz value of getConversionRate(msg.value) is in EHT with 18 decimal
      address[] public funders; // store the addresses of fund senders
      mapping (address funder => uint256 amountRaised) public fundsRaisedByAddress; // search the fund sent by address and get the value of total amount raised from that
+     address public owner;
+     //define constructor
+     constructor() {
+        owner = msg.sender;
+     }
     // define function of fund
     function Fund() public payable {
         // allow user to send money
@@ -32,7 +37,7 @@ contract FundMe {
         // for example we used a state variable myValue
     }
 
-    function Withdraw() public  {
+    function Withdraw() public onlyOwner {
         for (uint256 funderIndex; funderIndex < funders.length; funderIndex++) 
         {
             address funder = funders[funderIndex]; // get address from the funders Array
@@ -47,14 +52,20 @@ contract FundMe {
         // payable(msg.sender) = payable address
         // this key word is the object of thise whole contract
         // transfer automatically revert the transection on failed
-        payable(msg.sender).transfer(address(this).balance); // msg.value will be equal to ETH balance of this contract in our case
+            //payable(msg.sender).transfer(address(this).balance); // msg.value will be equal to ETH balance of this contract in our case
         // using send which return bool instead of throw any error, its very risky
-       bool sendSuccess = payable(msg.sender).send(address(this).balance);
+            //bool sendSuccess = payable(msg.sender).send(address(this).balance);
        // on send method we have to check manually if transection is failed so using require to revert it.
-       require(sendSuccess,"send failed");
+            //require(sendSuccess,"send failed");
        // call , this is most powerfull function in eth infrasruction to call any external fucntion to call
        (bool callSuccess,)= payable(msg.sender).call{value: address(this).balance}(""); // it return two values , gas used and return reason but here we need just success or not
        require(callSuccess,"Call failed");
+    }
+
+    // modifier
+    modifier onlyOwner(){
+        require(msg.sender == owner, "you are not the owner!");
+        _; // rest of the function, first execute above line
     }
 
    

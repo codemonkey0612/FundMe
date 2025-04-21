@@ -7,6 +7,11 @@
 		"abi": [
 			{
 				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
 				"name": "Fund",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -82,6 +87,19 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -120,11 +138,11 @@
 			]
 		},
 		"FundMe.sol": {
-			"keccak256": "0x5ba3055aa8da66be1a0d01672267b1a341ab8a00c63feecaf6e258e458b95983",
+			"keccak256": "0xffbe7eeae75db87a01cae15ff933fd096ad528d3131fd65699061b8c036ca42e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://35626440aa24afd212cac7e6e32856f1d1f0aedb423350e74b7faa8e0ff5f0f4",
-				"dweb:/ipfs/QmVAFjc3yawnMBmTc86Ch9Ejpw74j2Fh8n5LnzXmQVabXQ"
+				"bzz-raw://14fe8524a3e3bb1da4a0ddb8b4ffe94902b36b54bfd45a46eb01049bca8442be",
+				"dweb:/ipfs/QmWdL3ieJfx4EpitXMbGtJVr98B7eusBGFGkAstx8CRKH6"
 			]
 		},
 		"PriceConvertor.sol": {
