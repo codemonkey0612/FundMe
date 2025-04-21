@@ -3,29 +3,35 @@ pragma solidity ^0.8.19;
 
 import {PriceConvertor} from "./PriceConvertor.sol"; // import library to use here
 
+
+//826,175 
+//763,083 
 contract FundMe {
      //event FundReceived(address sender, uint256 amount); // for console.log
      //event EthReceived(uint256 amount); // for console.log
     using PriceConvertor for uint256; // attaching with uint256 hass access to all priceconvertor functions or getconversion rate function. msg.value is uint256 thats why it can call getConversionRate func.
-     uint256 public myValue = 1;
+     //uint256 public myValue = 1;
      //uint256 public minimumUsd = 5;
-     uint256 public minimumUsd = 5e18; // bcz value of getConversionRate(msg.value) is in EHT with 18 decimal
+     // WHEN WE USE CONSTANT THE CONVENTION TO DECLARE A VARIABLE LIKE THIS ALL CAPS AND _
+     uint256 public constant MINIMUM_USD = 5e18; // bcz value of getConversionRate(msg.value) is in EHT with 18 decimal
      address[] public funders; // store the addresses of fund senders
      mapping (address funder => uint256 amountRaised) public fundsRaisedByAddress; // search the fund sent by address and get the value of total amount raised from that
-     address public owner;
+     
+     //address public owner;
+     address public immutable i_owner; // it is a immutable variable that can't be changed. convention to start with i_ 
      //define constructor
      constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
      }
     // define function of fund
     function Fund() public payable {
         // allow user to send money
         // send a minimum amount
-        myValue = myValue +2;
+        //myValue = myValue +2;
         // 1: how we will send ETH to this contract via payable keyword
         // require(msg.value > 1e18, "not enough ETH amount!"); //1e18 = 1ETH = 1000000000000000000 wei , require mean its complusoty
-        //require(getConversionRate(msg.value) >= minimumUsd, "not enough ETH amount!"); //1e18 = 1ETH = 1000000000000000000 wei , require mean its complusoty
-        require(msg.value.getConversionRate() >= minimumUsd, "not enough ETH amount!"); //getConversionRate is a function from PriceConvertor library that can convert ETH value to USD
+        //require(getConversionRate(msg.value) >= MINIMUM_USD, "not enough ETH amount!"); //1e18 = 1ETH = 1000000000000000000 wei , require mean its complusoty
+        require(msg.value.getConversionRate() >= MINIMUM_USD, "not enough ETH amount!"); //getConversionRate is a function from PriceConvertor library that can convert ETH value to USD
         // getConversionRate take a parameter 'uint ethAmount' but we didn't pass coz by default its first param is msg.value and if we want to pass 2nd param than we need to mentioned it
         
         funders.push(msg.sender); // store address of sender to the funders array
@@ -64,7 +70,7 @@ contract FundMe {
 
     // modifier
     modifier onlyOwner(){
-        require(msg.sender == owner, "you are not the owner!");
+        require(msg.sender == i_owner, "you are not the owner!");
         _; // rest of the function, first execute above line
     }
 
