@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import {PriceConvertor} from "./PriceConvertor.sol"; // import library to use here
-
 
 //826,175 
 //763,083 
@@ -43,6 +43,12 @@ contract FundMe {
         // what is revert ?
         // undo any task which have done. but gas will be paid or consimed due to execution
         // for example we used a state variable myValue
+    }
+
+    // get version function for zkSync to show different address for different netwrok
+    function getVersion() public view returns (uint256){
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(0xfEefF7c3fB57d18C5C6Cdd71e45D2D0b4F9377bF);
+        return priceFeed.version();
     }
 
     function Withdraw() public onlyOwner {
