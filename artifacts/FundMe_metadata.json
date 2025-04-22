@@ -86,6 +86,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "getVersion",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "i_owner",
 				"outputs": [
 					{
@@ -138,11 +151,11 @@
 			]
 		},
 		"FundMe.sol": {
-			"keccak256": "0x083bffa6911d49e075fbe6ede964796c5de6da9c53c408664cdeb4af70859c21",
+			"keccak256": "0x6126ab4e82b38ca8480d6b6c7d329df690c3a50755d3999a77402287b7a6c583",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://32f6576f615f706181feb3c3af1bec0b9ef6df4082aa64fd792e3d2b858b5f32",
-				"dweb:/ipfs/QmdQZwr19xiBLTuCzpRMQAteA5zAj7CNh7JfN23NQEcGNA"
+				"bzz-raw://32037070d2477d3c12702d5578f3455a6c8a014838b670cfd8be63a34a44fd6f",
+				"dweb:/ipfs/QmaUZN1x9VaHyy54BLUZ7W9F8ov9udAHpKWnbewQe7JvLK"
 			]
 		},
 		"PriceConvertor.sol": {
