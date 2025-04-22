@@ -18,7 +18,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"FallbackExample.sol": "Name"
+			"FallbackExample.sol": "Fall"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -33,11 +33,11 @@
 	},
 	"sources": {
 		"FallbackExample.sol": {
-			"keccak256": "0x0655f3ba73e402d39edb12f984fed4c2d9a6da66404cf877203e43eecf1100c5",
+			"keccak256": "0xff7eb7b64c6327e6fe24bde666fb4e74be2a4b9cc040805af0584b0d3042e1fa",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://726d49cfe79ff4cfe4e2cd923f471d9d8558bbc67a9ed0836ec7c532ecf5baaa",
-				"dweb:/ipfs/QmZ3sKbHLhnWbzui6z5oaSjb3oTmciqb7UQcscHJSV14Wn"
+				"bzz-raw://a4786034c369c6f3cb1d7683cfc3f061da27f4587a20869c66daf6aca56f4fce",
+				"dweb:/ipfs/QmQ5aN92Y2AFPrAe6NhuLSgWbNKgtSPsibQGsWUfMSxt6z"
 			]
 		}
 	},

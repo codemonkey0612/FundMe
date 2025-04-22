@@ -6,6 +6,8 @@ import {PriceConvertor} from "./PriceConvertor.sol"; // import library to use he
 
 //826,175 
 //763,083 
+// const optimizaton and custom error handling
+error NotOwner();
 contract FundMe {
      //event FundReceived(address sender, uint256 amount); // for console.log
      //event EthReceived(uint256 amount); // for console.log
@@ -70,9 +72,21 @@ contract FundMe {
 
     // modifier
     modifier onlyOwner(){
-        require(msg.sender == i_owner, "you are not the owner!");
+        //require(msg.sender == i_owner, "you are not the owner!");
+        if(msg.sender != i_owner){
+            revert NotOwner(); // same action like require above line do, but this one is a gas cost efficient
+        }
         _; // rest of the function, first execute above line
     }
+
+    // what happend if somone send eth to this contract without calling fund function
+    receive () external payable{
+        Fund(); // if someone send eth without data fall back to this function,its the default action
+    }
+
+    fallback() external payable {
+        Fund(); // if someone send eth with data fall back to this function, its the default action
+     }
 
    
 } 
